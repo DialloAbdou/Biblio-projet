@@ -1,8 +1,8 @@
 import React from 'react'
-
-const Bouton=({children,couleur,clickAjout})=>{
+const Bouton=({children,couleur,clickAjout,typeCss})=>{
+  const btnCss =`${couleur} ${typeCss}`
     return (
-        <button className={couleur} onClick={clickAjout}>{children}</button>
+        <button className={btnCss} onClick={clickAjout} >{children}</button>
       )
 
 }
