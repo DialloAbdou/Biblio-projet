@@ -12,6 +12,14 @@ class Livres extends Component {
             { id: 4, titre: "Le Virus", auteur: "Tya Milo", nbPages: 120 }
         ]
     }
+    handleDelete = (id)=>{
+      const indexElement = this.state.livres.findIndex(elmt=>{
+           return elmt.id === id;              
+      })
+      const newTabLivres = [...this.state.livres];
+      newTabLivres.splice(indexElement,1);
+      this.setState({livres:newTabLivres});  
+    }
     render() {
       const {livres}= this.state
         return (
@@ -33,6 +41,7 @@ class Livres extends Component {
                                    titre={livre.titre}
                                    auteur={livre.auteur}
                                    nbPages={livre.nbPages}
+                                  suppligne = {()=>this.handleDelete(livre.id)}
                                   />   
                                 </tr>
                             )
