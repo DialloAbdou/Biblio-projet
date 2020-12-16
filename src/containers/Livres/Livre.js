@@ -8,13 +8,7 @@ const Livre=({titre,auteur,nbPages,suppligne})=>{
         <td>{nbPages}</td>
         <td> <Bouton couleur='btn btn-warning' clic={() => console.log('modification')}>MODIFICATION</Bouton></td>
         <td> <Bouton couleur='btn btn-danger' clic={suppligne}>SUPPRESSION</Bouton></td>
-
     </>
-
     )
 }
-
-    
-
-
 export default Livre

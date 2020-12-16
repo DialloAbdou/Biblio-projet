@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Bouton from '../../components/Boutons/Bouton'
 import Livre from '../Livres/Livre'
+import FormulaireAjout from './ForumulaireAjout/FormulaireAjout'
 
 
 class Livres extends Component {
@@ -41,7 +42,7 @@ class Livres extends Component {
                                    titre={livre.titre}
                                    auteur={livre.auteur}
                                    nbPages={livre.nbPages}
-                                  suppligne = {()=>this.handleDelete(livre.id)}
+                                   suppligne = {()=>this.handleDelete(livre.id)}
                                   />   
                                 </tr>
                             )
@@ -49,6 +50,7 @@ class Livres extends Component {
 
                     </tbody>
                 </table>
+                {this.props.ajoutLivre && <FormulaireAjout/>}
             </div>
         )
     }

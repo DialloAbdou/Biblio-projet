@@ -1,22 +1,32 @@
 
-import React, { Component } from 'react';
+import React, { Children, Component } from 'react';
 import Titre from './components/Titres/Titre';
 import Bouton from './components/Boutons/Bouton';
 import Livres from './containers/Livres/Livres';
 
 class App extends Component {
+  state={
+    isAjouter:false
+  }
   handleAjouter = () => {
-    console.log("Ajouter un ELement")
+    this.setState((oldState,props)=>{
+      return {
+           isAjouter: !oldState.isAjouter
+        }
+    })
+
   }
   render() {
     return (
       <div className="container">
         <Titre>Page listant les livres</Titre>
-        <Livres />
+        <Livres ajoutLivre ={this.state.isAjouter} />
         <Bouton
           couleur='btn btn-success'
           typeCss='w-100'
-          clickAjout={this.handleAjouter}>AJOUTER</Bouton>
+          clic={this.handleAjouter}>
+            {!this.state.isAjouter ? "Ajouter":"Fermer L'Ajout"}
+          </Bouton>
       </div>
     )
   }
