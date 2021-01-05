@@ -24,7 +24,7 @@ class Livres extends Component {
     render() {
       const {livres}= this.state
         return (
-            <div className="container">
+            <div className="container table-responsive">
                 <table className="table text-center">
                     <thead>
                         <tr className="table-dark">

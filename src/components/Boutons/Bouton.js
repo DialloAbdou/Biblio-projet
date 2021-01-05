@@ -6,6 +6,4 @@ const Bouton=({children,couleur,clic,typeCss})=>{
       )
 
 }
-
-
 export default Bouton

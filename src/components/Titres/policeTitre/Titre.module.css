@@ -3,7 +3,6 @@
 .monTitre {
     font-family: 'Sigmar One', cursive;
 }
-
 .monTitre:hover{
    color:orange!important;
 }
