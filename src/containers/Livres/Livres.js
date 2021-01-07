@@ -11,7 +11,8 @@ class Livres extends Component {
             { id: 2, titre: "La france du 19ème", auteur: "Albert Patrick", nbPages: 500 },
             { id: 3, titre: "Le monde des animaux", auteur: "Marc Merlin", nbPages: 250 },
             { id: 4, titre: "Le Virus", auteur: "Tya Milo", nbPages: 120 }
-        ]
+        ],
+        lastIndex: 4
     }
     handleDelete = (id)=>{
       const indexElement = this.state.livres.findIndex(elmt=>{
@@ -21,6 +22,27 @@ class Livres extends Component {
       newTabLivres.splice(indexElement,1);
       this.setState({livres:newTabLivres});  
     }
+    handleAjouLivre = (titre, auteur, nbPages) => {
+        const livre = {
+            id: this.state.lastIndex+1,
+            titre: titre,
+            auteur: auteur,
+            nbPages: nbPages
+        };
+        // copie le tableau
+        const newTab = [...this.state.livres];
+        
+        newTab.push(livre);
+        // Modifier le state
+        this.setState(oldstate=>{
+            return{
+                Livres: newTab,
+                lastIndex : oldstate.lastIndex+1
+            }
+        })
+
+    }
+
     render() {
       const {livres}= this.state
         return (
@@ -50,7 +72,7 @@ class Livres extends Component {
 
                     </tbody>
                 </table>
-                {this.props.ajoutLivre && <FormulaireAjout/>}
+                {this.props.ajoutLivre && <FormulaireAjout validation ={this.handleAjouLivre}/>}
             </div>
         )
     }
