@@ -8,9 +8,15 @@ class FormulaireAjout extends Component {
         auteurSaisie: "",
         nbPagesSaisie: ""
     }
-    handleValidationForms =(event)=>{
-        this.props.validation(this.state.titreSaisie, this.state.auteurSaisie)
+    handleValidationForms = (event) => {
+        this.props.validation(this.state.titreSaisie, this.state.auteurSaisie, this.state.nbPagesSaisie);
         event.preventDefault();
+        this.setState({
+            titreSaisie: "",
+            auteurSaisie: "",
+            nbPagesSaisie: ""
+
+        })
     }
 
     render() {
@@ -47,8 +53,8 @@ class FormulaireAjout extends Component {
                             onChange={(event) => this.setState({ nbPagesSaisie: event.target.value })}
 
                         />
-                    </div>
-                    <Bouton typeCss="btn-primary" clic ={this.handleValidationForms} >Valider</Bouton>
+                    </div> 
+                    <Bouton typeCss="btn-primary" clic={this.handleValidationForms} >Valider</Bouton>
 
                 </form>
             </>

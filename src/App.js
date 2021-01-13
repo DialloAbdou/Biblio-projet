@@ -21,7 +21,7 @@ class App extends Component {
     
       <div className="container">
         <Titre>Page listant les livres</Titre>
-        <Livres ajoutLivre ={this.state.isAjouter} />
+        <Livres ajoutLivre ={this.state.isAjouter} fermerAjoutLivre={()=>this.setState({isAjouter:false})}/>
         <Bouton
           couleur='btn btn-success'
           typeCss='w-100'

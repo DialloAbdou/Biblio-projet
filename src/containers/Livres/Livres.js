@@ -22,29 +22,28 @@ class Livres extends Component {
       newTabLivres.splice(indexElement,1);
       this.setState({livres:newTabLivres});  
     }
-    handleAjouLivre = (titre, auteur, nbPages) => {
+    handleAjouLivre = (titre, auteur, nbPages) => { 
         const livre = {
-            id: this.state.lastIndex+1,
+            id: this.state.lastIndex + 1,
             titre: titre,
             auteur: auteur,
             nbPages: nbPages
-        };
-        // copie le tableau
-        const newTab = [...this.state.livres];
-        
-        newTab.push(livre);
-        // Modifier le state
-        this.setState(oldstate=>{
-            return{
-                Livres: newTab,
-                lastIndex : oldstate.lastIndex+1
-            }
-        })
-
+        }
+       const newTabLivres =[...this.state.livres];
+       newTabLivres.splice()
+       newTabLivres.push(livre);
+       this.setState(oldTab=>{
+           return {
+            livres: newTabLivres,
+               lastIndex: oldTab.lastIndex+1
+           }
+  
+       })
+       this.props.fermerAjoutLivre();
     }
 
     render() {
-      const {livres}= this.state
+    //   const {livres}= this.state
         return (
             <div className="container table-responsive">
                 <table className="table text-center">
@@ -53,11 +52,10 @@ class Livres extends Component {
                             <th>Titre</th>
                             <th>Auteur</th>
                             <th>Nombre de pages</th>
-                            <th colspan="3">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {livres.map(livre => {
+                        {this.state.livres.map(livre=> {
                             return (
                                 <tr key={livre.id}>
                                   <Livre
