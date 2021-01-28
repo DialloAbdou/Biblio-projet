@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Bouton from '../../components/Boutons/Bouton'
 import Livre from '../Livres/Livre'
 import FormulaireAjout from './ForumulaireAjout/FormulaireAjout'
+import FormulaireModif from './FormulaireModif/FormulaireModif'
 
 
 class Livres extends Component {
@@ -12,8 +13,16 @@ class Livres extends Component {
             { id: 3, titre: "Le monde des animaux", auteur: "Marc Merlin", nbPages: 250 },
             { id: 4, titre: "Le Virus", auteur: "Tya Milo", nbPages: 120 }
         ],
-        lastIndex: 4
+        lastIndex: 4,
+        indexModif:0
+
     }
+
+    
+    /**
+     * 
+     * @param {Suppression d'un Livre} id 
+     */
     handleDelete = (id)=>{
       const indexElement = this.state.livres.findIndex(elmt=>{
            return elmt.id === id;              
@@ -22,6 +31,12 @@ class Livres extends Component {
       newTabLivres.splice(indexElement,1);
       this.setState({livres:newTabLivres});  
     }
+    /**
+     * Ajout d'un livre
+     * @param {*} titre 
+     * @param {*} auteur 
+     * @param {*} nbPages 
+     */
     handleAjouLivre = (titre, auteur, nbPages) => { 
         const livre = {
             id: this.state.lastIndex + 1,
@@ -41,6 +56,24 @@ class Livres extends Component {
        })
        this.props.fermerAjoutLivre();
     }
+    handleModification =(id,titre, auteur,nbPages)=>{
+        const livreIndxe = this.state.livres.findIndex(l=>{
+            return l.id === id;
+        });
+        const newLivre ={
+             id: id,
+             titre: titre,
+             auteur: auteur,
+             nbPages: nbPages
+        }
+        const newLivres = [...this.state.livres];
+        newLivres[livreIndxe] = newLivre;
+        this.setState({
+            livres:newLivres,
+            indexModif:0
+        })
+
+    }
 
     render() {
     //   const {livres}= this.state
@@ -56,16 +89,37 @@ class Livres extends Component {
                     </thead>
                     <tbody>
                         {this.state.livres.map(livre=> {
-                            return (
-                                <tr key={livre.id}>
-                                  <Livre
-                                   titre={livre.titre}
-                                   auteur={livre.auteur}
-                                   nbPages={livre.nbPages}
-                                   suppligne = {()=>this.handleDelete(livre.id)}
-                                  />   
-                                </tr>
-                            )
+                            if(livre.id!=this.state.indexModif)
+                            {
+                                return (
+                                    <tr key={livre.id}>
+                                      <Livre
+                                       titre={livre.titre}
+                                       auteur={livre.auteur}
+                                       nbPages={livre.nbPages}
+                                       suppligne = {()=>this.handleDelete(livre.id)}
+                                       modification = {()=>this.setState({indexModif:livre.id})}
+                                      />   
+                                    </tr>
+                                );
+
+                            }else{
+                               return (
+                                   <tr key={livre.id}>
+                                       <FormulaireModif
+                                           id={livre.id}
+                                           titre={livre.titre}
+                                           auteur={livre.auteur}
+                                           nbPages={livre.nbPages}
+                                           validationModification={this.handleModification} />;
+                                   </tr>
+
+                               ) 
+                              
+                                 
+                            
+                   
+                            }
                         })}
 
                     </tbody>

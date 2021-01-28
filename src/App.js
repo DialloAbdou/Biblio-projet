@@ -2,7 +2,6 @@ import React, { Children, Component } from 'react';
 import Titre from './components/Titres/Titre';
 import Bouton from './components/Boutons/Bouton';
 import Livres from './containers/Livres/Livres';
-
 class App extends Component {
   state={
     isAjouter:false
@@ -13,7 +12,6 @@ class App extends Component {
            isAjouter: !oldState.isAjouter
         }
     })
-
   }
   render() {
     
